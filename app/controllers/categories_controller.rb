@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :authenticate
   # GET /categories
   # GET /categories.json
   def index
@@ -14,10 +15,12 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-
+    @posts = Category.find(params[:id]).posts
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @category }
+      format.js # show.js.erb
+      format.json { render json: @category, json: @posts }
     end
   end
 

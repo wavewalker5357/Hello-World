@@ -1,13 +1,26 @@
 Web::Application.routes.draw do
-  resources :categories 
 
+  #resources :categories 
 
-  resources :posts do
-    resources :comments
-  end
+  # resources :posts do
+  #  resources :comments
+  # end
 
   get "home/index"
   match '/' => "home#index", :as => :home
+
+  # 1. mozna varianta
+  scope "/admin", :name_prefix => "admin" do
+    resources :posts, :comments, :categories, :home
+    resources :posts do
+   resources :comments
+  end
+  end
+
+  # 2. mozna varianta
+  # namespace :admin do
+  #  resources :posts, :categories, :home
+  # end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

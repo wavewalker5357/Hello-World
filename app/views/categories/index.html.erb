@@ -1,6 +1,6 @@
 <h1>Seznam kategorií</h1>
 
-<table border="1px" bordercolor="#ededed">
+<table class="table table-striped">
   <tr>
     <th>Název</th>
     <th></th>
@@ -11,9 +11,9 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.name %></td>
-    <td><%= link_to 'Zobrazit', category %></td>
-    <td><%= link_to 'Upravit', edit_category_path(category) %></td>
-    <td><%= link_to 'Smazat', category, method: :delete, data: { confirm: 'Opravdu smazat?' } %></td>
+    <td><%= link_to 'Zobrazit', category, { :class=>"btn btn-mini btn-primary" } %></td>
+    <td><%= link_to 'Upravit', edit_category_path(category), { :class=>"btn btn-mini btn-warning" } %></td>
+    <td><%= link_to 'Smazat', category, :class=>"btn btn-mini btn-danger", method: :delete, data: { confirm: 'Opravdu smazat?' } %></td>
   </tr>
 <% end %>
 </table>

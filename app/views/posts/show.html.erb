@@ -1,8 +1,8 @@
 <p class="notice"><%= notice %></p>
  
 <p>
-  <b>Stanice:</b>
-  <%= @post.name %>
+   <h1>Stanice:
+  <%= @post.name %></h1>
 </p>
  
 <p>
@@ -12,7 +12,7 @@
  
 <p>
   <b>Text:</b>
-  <%= @post.content %>
+  <%= raw( @post.content ) %>
 </p>
  
 <p>

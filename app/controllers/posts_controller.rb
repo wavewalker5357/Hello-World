@@ -1,11 +1,22 @@
 class PostsController < ApplicationController
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :except => [:show]
   before_filter :prepare_categories
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    #@posts = Post.all
 
+    @posts = if params[:search]
+      #@posts = Post.find_with_index(params[:search])
+      @query = params[:search].downcase
+      @posts = Post.where("lower(content) LIKE ? OR lower(title) LIKE ? ", "%#{@query}%", "%#{@query}%")  
+      
+      #name = params[:search]
+      #@posts = Post.find(:first, :conditions => [ "lower(content) LIKE ?", name.downcase ])
+    else
+      @posts = Post.all
+    end
+puts YAML::dump(@query)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -82,7 +93,11 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  #def search
+  #  my_search_results = Post.with_query(params[:id])
+  #end
+ 
     private
     def prepare_categories
       @categories = Category.all

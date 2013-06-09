@@ -1,6 +1,6 @@
 <h1>Všechny stanice</h1>
 
-<table border="1px" bordercolor="#ededed">
+<table class="table table-striped">
   <tr>
     <th>Stanice</th>
     <th>Adresa</th>
@@ -15,11 +15,12 @@
   <tr>
     <td><%= post.name %></td>
     <td><%= post.title %></td>
-    <td><%= post.content %></td>
-    <td>  <%= post.category.name %></td>
-    <td><%= link_to 'Zobrazit', post %></td>
-    <td><%= link_to 'Upravit', edit_post_path(post) %></td>
-    <td><%= link_to 'Smazat', post, method: :delete, data: { confirm: 'Opravdu smazat?' } %></td>
+    <td><% if (post.content != nil) then %><%= raw( post.content.gsub(@query, sprintf('<span class="label label-info">%s</span>', @query) ) ) %><% else %>Empty<% end %></td>
+    <td><%= link_to post.category.name, category_path( post.category ) %></td>
+
+    <td><%= link_to 'Zobrazit', post, { :class=>"btn btn-mini btn-primary" } %></td>
+    <td><%= link_to 'Upravit', edit_post_path(post), { :class=>"btn btn-mini btn-warning" } %></td>
+    <td><%= link_to 'Smazat', post, :class=>"btn btn-mini btn-danger", method: :delete, data: { confirm: 'Opravdu smazat?' } %></td>
   </tr>
 <% end %>
 </table>

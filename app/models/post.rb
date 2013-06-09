@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  
+  acts_as_indexed :fields => [:title, :name, :content]
+
   validates :name, :presence => true
   validates :title, :presence => true,
                     :length => { :minimum =>5 }
@@ -10,4 +11,6 @@ class Post < ActiveRecord::Base
 
   accepts_nested_attributes_for :tags, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+
+
 end

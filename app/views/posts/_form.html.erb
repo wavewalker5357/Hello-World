@@ -12,16 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= post_form.label "Stanice" %><br />
+    <%= post_form.label "Stanice *" %><br />
     <%= post_form.text_field :name %>
   </div>
   <div class="field">
-    <%= post_form.label "Adresa" %><br />
+    <%= post_form.label "Adresa *" %><br />
     <%= post_form.text_field :title %>
   </div>
   <div class="field">
     <%= post_form.label "Text" %><br />
-    <%= post_form.text_area :content %>
+    <!-- <%= post_form.text_area :content, :class => "tinymce" %> -->
+    <%= post_form.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
   </div>
   
     <div class="field">
@@ -35,6 +36,9 @@
   <div class="actions">
     <%= post_form.submit %>
   </div>
+  <div class="notice">
+  	* jsou povinné
+  	</div>
 <% end %>
 
 
